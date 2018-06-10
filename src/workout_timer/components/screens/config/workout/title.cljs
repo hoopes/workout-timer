@@ -8,10 +8,12 @@
    "Title: "])
 
 (defn- input []
-  [rn/TextInput
-   {:style {:text-align "center" }
-    :placeholder "Enter Title"
-    :on-change-text #(rf/dispatch [:edit/set-workout-attr :title %])}])
+  (let [workout (rf/subscribe [:edit/workout])]
+    [rn/TextInput
+     {:style {:text-align "center" }
+      :placeholder "Enter Title"
+      :value (:title @workout)
+      :on-change-text #(rf/dispatch [:edit/set-workout-attr :title %])}]))
 
 (defn main []
 

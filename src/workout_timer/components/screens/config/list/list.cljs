@@ -9,7 +9,7 @@
 
 
 
-(defn workout-list-view [props]
+(defn workout-list-view []
 
   (fn []
     (let [workout-list (rf/subscribe [:ordered-workout-list])]
@@ -18,4 +18,4 @@
 
        (for [workout @workout-list]
          ^{:key (:id workout)}
-         [i/main props workout])])))
+         [i/main workout])])))

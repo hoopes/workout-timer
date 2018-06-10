@@ -27,10 +27,7 @@
   (fn []
     [rn/Button
      {:title "ADD WORKOUT"
-      ;:on-press #(rf/dispatch [:workout-timer.nav.re-frame/navigate
-                                          ;"ConfigWorkout" {:workout "blah"}])
-      }]))
-      ;:on-press #(navigate "ConfigWorkout" {:workout "blah"})
+      :on-press #(rf/dispatch [:edit/start])}]))
 
 (defn list-main-screen []
 

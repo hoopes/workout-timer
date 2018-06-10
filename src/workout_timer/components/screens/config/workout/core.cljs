@@ -38,15 +38,14 @@
 
 (defn config-workout-screen []
 
-  (fn [{:keys [screenProps navigation] :as props}]
-    (let [{:keys [navigate state]} navigation
-          workout (get-in [:params :workout] state {})]
+  (fn []
+    (let [workout (rf/subscribe [:edit/workout])]
 
       (.log js/console "GOT WORKOUT")
-      (.log js/console (clj->js workout))
+      (.log js/console (clj->js @workout))
 
       ;; This can't be the best place to do this, right?
-      (rf/dispatch [:edit/set-workout workout])
+      ;(rf/dispatch [:edit/set-workout workout])
 
       [rn/View {:style {:flex 1 :flex-direction "column" }}
 
@@ -61,6 +60,6 @@
        ;[rn/View {:style {:flex 1}} [ex/main]]
 
        ;; Save/cancel buttons (save only enabled if edit workout set)
-       [rn/View {:style {:flex 1 :flex-direction "row" }}
+       [rn/View {:style {:flex 1 :flex-direction "row"}}
         [rn/View {:style {:flex 1}} [cancel-btn]]
         [rn/View {:style {:flex 1}} [save-btn]]]])))

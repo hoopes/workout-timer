@@ -1,5 +1,6 @@
 (ns workout-timer.components.screens.config.workout.util.events
-  (:require [re-frame.core :as rf]))
+  (:require [re-frame.core :as rf]
+            [workout-timer.nav.re-frame :as nav]))
 
 (defn- get-defaults []
   {:id (keyword (str (random-uuid)))
@@ -10,9 +11,18 @@
    :exercises []})
 
 (defn- set-workout-defaults [workout]
-  (let [workout (if map? workout {})]
+  (let [workout (into {} workout)]
     (merge (get-defaults) workout)))
 
+(rf/reg-event-fx
+  :edit/start
+  [rf/trim-v]
+  (fn [cofx [workout]]
+    {:dispatch-n
+     [[:edit/set-workout workout]
+      [::nav/navigate "ConfigWorkout"]]}))
+
+;; Make a copy of the workout to edit it.
 (rf/reg-event-db
   :edit/set-workout
   rf/trim-v
@@ -41,20 +51,24 @@
 
 ;; FIXME: Navigate!
 ;; FIXME: Save state to disk!
-(rf/reg-event-db
+(rf/reg-event-fx
   :edit/save-workout
   rf/trim-v
-  (fn [db []]
-    (let [workout (get-in db [:edit-workout :workout])
+  (fn [cofx _]
+    (let [db (:db cofx)
+          workout (get-in db [:edit-workout :workout])
           workout (merge {:title "Untitled"} workout)
           workout-id (:id workout)]
-      (-> db
-          (assoc-in [:workouts workout-id] workout)
-          (assoc :edit-workout nil)))))
+      {:db  (-> db
+            (assoc-in [:workouts workout-id] workout)
+            (assoc :edit-workout nil))
+       :dispatch [::nav/go-back]})))
 
 ;; FIXME: Navigate!
-(rf/reg-event-db
+(rf/reg-event-fx
   :edit/cancel-workout-edit
   rf/trim-v
-  (fn [db []]
-    (assoc db :edit-workout nil)))
+  (fn [cofx _]
+    (let [db (:db cofx)]
+      {:db (assoc db :edit-workout nil)
+       :dispatch [::nav/go-back]})))

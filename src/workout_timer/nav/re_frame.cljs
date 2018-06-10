@@ -35,7 +35,7 @@
 
 
 (reg-event-db
-  ::goBack
+  ::go-back
   [trim-v]
   (fn [app-db [routeName]]
     (let [routing-state (get app-db :routing)
@@ -49,6 +49,29 @@
   (fn [app-db]
     (get-in app-db [:routing])))
 
+;; Can I test this somehow?
+(defn- curr-route [routes]
+  (let [idx (get routes "index")
+        route-list (get routes "routes")
+        next-route (get route-list idx)]
+
+    (if (nil? idx)
+      routes
+      (curr-route next-route))))
+
+(reg-sub
+  ::route-name
+  (fn [app-db]
+    (let [routes (:routing app-db)
+          route (curr-route routes)]
+      (get route "routeName"))))
+
+(reg-sub
+  ::route-params
+  (fn [app-db]
+    (let [routes (:routing app-db)
+          route (curr-route routes)]
+      (get route "params"))))
 
 ;; API
 (def stack-screen reagent/stack-screen)
@@ -64,8 +87,8 @@
     (-> main
         .-router
         (as-> router
-            (.getStateForAction router
-                                (.getActionForPathAndParams router (name key)))))))
+          (.getStateForAction router
+                              (.getActionForPathAndParams router (name key)))))))
 
 (def nil-fn (fn [_]))
 
@@ -80,8 +103,8 @@
                               (init-state root-router init-route-name))]
         [:> root-router {:navigation
                          (base/addNavigationHelpers
-                          (clj->js {:state    routing-state
-                                    :addListener add-listener
-                                    :dispatch (fn [action]
-                                                (let [next-state (getStateForAction action routing-state)]
-                                                  (dispatch [::swap-routing-state next-state])))}))}]))))
+                           (clj->js {:state    routing-state
+                                     :addListener add-listener
+                                     :dispatch (fn [action]
+                                                 (let [next-state (getStateForAction action routing-state)]
+                                                   (dispatch [::swap-routing-state next-state])))}))}]))))
