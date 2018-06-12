@@ -18,6 +18,10 @@
   :edit/start
   [rf/trim-v]
   (fn [cofx [workout]]
+
+    (println "STARTING EDIT WORKOUT")
+    (println workout)
+
     {:dispatch-n
      [[:edit/set-workout workout]
       [::nav/navigate "ConfigWorkout"]]}))
@@ -62,7 +66,8 @@
       {:db  (-> db
             (assoc-in [:workouts workout-id] workout)
             (assoc :edit-workout nil))
-       :dispatch [::nav/go-back]})))
+       :dispatch-n [[:store-db]
+                    [::nav/go-back]]})))
 
 ;; FIXME: Navigate!
 (rf/reg-event-fx

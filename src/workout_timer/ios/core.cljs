@@ -9,13 +9,13 @@
             [day8.re-frame.async-flow-fx]
             [workout-timer.events.core]
             [workout-timer.subs.core]
-            ;[workout-timer.utils.effects.core]
+            [workout-timer.effects.core]
             ))
 
 (def app-root root/router)
 
 (defn init []
   (rf/dispatch-sync [:initialize-db])
-  ;(rf/dispatch-sync [:boot-app])
+  (rf/dispatch-sync [:boot-app])
   ;(.registerComponent rn/AppRegistry "WorkoutTimer" root-component))
   (.registerComponent rn/AppRegistry "WorkoutTimer" (r/reactify-component app-root)))

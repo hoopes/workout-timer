@@ -18,6 +18,11 @@
    {:title "Run"
     :on-press #(println "RUNNING!")}])
 
+(defn- delete-btn [workout]
+  [rn/Button
+   {:title "Del"
+    :on-press #(rf/dispatch [:workout/delete-workout [workout]])}])
+
 (defn main [workout]
   (fn []
     [rn/View {:style {:flex-direction "row"
@@ -25,7 +30,8 @@
                       :border-width 1 }}
 
      [rn/View {:style {:flex 8}} [title workout]]
-     [rn/View {:style {:flex 2}} [edit-btn workout]]
      [rn/View {:style {:flex 2}} [run-btn workout]]
+     [rn/View {:style {:flex 2}} [edit-btn workout]]
+     [rn/View {:style {:flex 2}} [delete-btn workout]]
 
      ]))

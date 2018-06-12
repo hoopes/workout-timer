@@ -6,8 +6,9 @@
             [workout-timer.rn.icons :as icons]
             [workout-timer.components.screens.config.list.item :as i]))
 
-
-
+;; This is just a component that renders the list items in a loop. It
+;; should be re-rendered whenever a workout changes (like is added or
+;; deleted)
 
 (defn workout-list-view []
 
@@ -17,5 +18,5 @@
                               :flex-direction "column"}}
 
        (for [workout @workout-list]
-         ^{:key (:id workout)}
+         ^{:key workout}
          [i/main workout])])))

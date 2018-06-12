@@ -11,6 +11,7 @@
                  [day8.re-frame/http-fx "0.1.6"]
                  [day8.re-frame/async-flow-fx "0.0.10"]
                  [core-async-storage "0.3.1"]
+                 [com.rpl/specter "1.1.1"]
                  [binaryage/oops "0.6.2"]]
 
   :plugins [[lein-cljsbuild "1.1.4"]
