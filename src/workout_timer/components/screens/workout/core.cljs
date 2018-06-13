@@ -29,15 +29,14 @@
 
 (defn workout-main-screen []
 
-  (fn [{:keys [screenProps navigation] :as props}]
-    (let [{:keys [navigate goBack state]} navigation
-          workout (rf/subscribe [:current-workout])]
+  (fn []
+    (let [workout (rf/subscribe [:current-workout])]
 
       [rn/View {:style root-view-style}
 
        (if @workout
-         [workout/workout-main-panel props]
-         [choose/choose-main-panel props])])))
+         [workout/workout-main-panel]
+         [choose/choose-main-panel])])))
 
 
 (def stack-screens

@@ -16,7 +16,7 @@
 (defn- run-btn [workout]
   [rn/Button
    {:title "Run"
-    :on-press #(println "RUNNING!")}])
+    :on-press #(rf/dispatch [:workout/start-workout workout])}])
 
 (defn- delete-btn [workout]
   [rn/Button

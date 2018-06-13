@@ -1,5 +1,6 @@
 (ns workout-timer.components.screens.workout.choose
-  (:require [workout-timer.nav.re-frame :as nav]
+  (:require [re-frame.core :as rf]
+    [workout-timer.nav.re-frame :as nav]
             [workout-timer.styles.core :as s]
             [workout-timer.rn.core :as rn]
             [workout-timer.rn.icons :as icons]))
@@ -16,18 +17,12 @@
                         :border-color "blue"
                         :border-width 1 }}
 
-       ;(println "IN MAIN PANEL")
-       ;(println navigation)
-
-       [rn/Text "CHOOSE A WORKOUT"]
-
        [rn/TouchableHighlight
         {
          ;:on-press (fn [] (println "BUTTON PRESSED"))
          ;:on-press #(navigate "ConfigTab")
-         :on-press (fn []
-                     (println navigate)
-                     (navigate "ConfigTab"))
+         :on-press #(rf/dispatch [::nav/navigate "ConfigTab"])
          }
-        [rn/Text "OH MAN"]]])))
+
+        [rn/Text "Choose a workout"]]])))
 
