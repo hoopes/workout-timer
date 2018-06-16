@@ -1,4 +1,4 @@
-(ns workout-timer.subs.workout
+(ns workout-timer.ops.workout.subs
   (:require [re-frame.core :as rf]))
 
 ;; Get the workout information, including the
@@ -11,7 +11,7 @@
         (get workouts curr-id))))
 
 ;; Return the state of the current workout
-;(defn- current-workout-state [db]
+;(defn- current-workout-state [db] )
 
 ;; Return the current workout, or nil if there is
 ;; none selected. The workouts are held as a map

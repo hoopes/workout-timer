@@ -7,15 +7,15 @@
             ;; Required here for their side effects
             [day8.re-frame.http-fx]
             [day8.re-frame.async-flow-fx]
-            [workout-timer.events.core]
-            [workout-timer.subs.core]
+            ;[workout-timer.events.core]
+            ;[workout-timer.subs.core]
             [workout-timer.effects.core]
+            [workout-timer.ops.core]
             ))
 
 (def app-root root/router)
 
 (defn init []
-  (rf/dispatch-sync [:initialize-db])
-  (rf/dispatch-sync [:boot-app])
-  ;(.registerComponent rn/AppRegistry "WorkoutTimer" root-component))
+  (rf/dispatch-sync [:boot/initialize-db])
+  (rf/dispatch-sync [:boot/boot-app])
   (.registerComponent rn/AppRegistry "WorkoutTimer" (r/reactify-component app-root)))

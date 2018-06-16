@@ -22,21 +22,19 @@
   {:title "Workout"
    :tabBarIcon tab-icon})
 
-(def root-view-style {:flex 1
-                      :flex-direction "column"
-                      :border-color "red"
-                      :border-width 4 })
+(def root-view-style {:flex 1 :flex-direction "column"})
 
 (defn workout-main-screen []
 
   (fn []
-    (let [workout (rf/subscribe [:current-workout])]
+    (let [workout (rf/subscribe [:workout/current-workout])]
 
       [rn/View {:style root-view-style}
 
        (if @workout
          [workout/workout-main-panel]
-         [choose/choose-main-panel])])))
+         [choose/choose-main-panel])
+         ])))
 
 
 (def stack-screens

@@ -19,8 +19,8 @@
   [rf/trim-v]
   (fn [cofx [workout]]
 
-    (println "STARTING EDIT WORKOUT")
-    (println workout)
+    ;(println "STARTING EDIT WORKOUT")
+    ;(println workout)
 
     {:dispatch-n
      [[:edit/set-workout workout]

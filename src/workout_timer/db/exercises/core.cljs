@@ -3,9 +3,9 @@
             [workout-timer.db.exercises.body_core :as core]
             [workout-timer.db.exercises.cardio :as cardio]))
 
-(def exercises [])
+(def exercises
 
-  ;(into []
-        ;(concat strength/exercises
-                ;core/exercises
-                ;cardio/exercises)))
+  (into []
+        (concat strength/exercises
+                core/exercises
+                cardio/exercises)))

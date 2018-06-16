@@ -1,8 +1,7 @@
-(ns workout-timer.events.workout
+(ns workout-timer.ops.workout.events
   (:require [re-frame.core :as rf]
             [workout-timer.nav.re-frame :as nav]
             [com.rpl.specter :as s]))
-
 
 (rf/reg-event-fx
   :workout/start-workout

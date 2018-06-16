@@ -5,7 +5,8 @@
 (def config-tab
   {:index     0,
    :routes    [{:routeName "ConfigList" :key "ConfigList" }
-               {:routeName "ConfigWorkout" :key "ConfigWorkout" }],
+               ;{:routeName "ConfigWorkout" :key "ConfigWorkout" }
+               ],
    :key       "ConfigTab",
    :routeName "ConfigTab"})
 
