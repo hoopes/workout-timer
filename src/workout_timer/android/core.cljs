@@ -7,9 +7,8 @@
             ;; Required here for their side effects...
             [day8.re-frame.http-fx]
             [day8.re-frame.async-flow-fx]
-            [workout-timer.events.core]
-            [workout-timer.subs.core]
-            ;[workout-timer.utils.effects.core]
+            [workout-timer.ops.core]
+            [workout-timer.effects.core]
             ))
 
 (def app-root root/router)

@@ -1,5 +1,6 @@
 (ns workout-timer.components.screens.config.workout.util.events
   (:require [re-frame.core :as rf]
+            [cljs-time.core :as t]
             [workout-timer.nav.re-frame :as nav]))
 
 (defn- get-defaults []
@@ -8,7 +9,9 @@
    :seconds-per-exercise 60
    :initial-rest 15
    :final-rest 45
-   :exercises []})
+   ;:num-exercises 12
+   :exercises []
+   :created (str (t/now))})
 
 (defn- set-workout-defaults [workout]
   (let [workout (into {} workout)]

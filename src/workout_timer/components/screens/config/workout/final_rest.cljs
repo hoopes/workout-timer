@@ -16,6 +16,7 @@
       :on-press #(rf/dispatch [:edit/set-picker picker-name])}]))
 
 ;; FIXME: Add cancel button
+;; FIXME: Create utility component for this
 (defn- picker []
   (let [workout (rf/subscribe [:edit/workout])]
     [rn/Modal {:animation-type "slide"}

@@ -33,7 +33,7 @@
 
   (fn [{:keys [screenProps navigation] :as props}]
     (let [{:keys [navigate goBack]} navigation
-          workout-list (rf/subscribe [:ordered-workout-list])]
+          workout-list (rf/subscribe [:workout/ordered-workout-list])]
 
       [rn/View {:style {:flex 1 :flex-direction "column" }}
 

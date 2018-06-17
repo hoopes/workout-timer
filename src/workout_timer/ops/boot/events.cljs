@@ -1,7 +1,7 @@
 (ns workout-timer.ops.boot.events
   (:require [re-frame.core :as rf]
-    [clojure.spec.alpha :as s]
-    [workout-timer.db.core :as db]))
+            [clojure.spec.alpha :as s]
+            [workout-timer.db.core :as db]))
 
 (defn boot-flow []
   {
@@ -14,6 +14,7 @@
   :boot/initialize-db
   ;validate-spec
   (fn [_ _]
+    (println "INIT DB")
     db/app-db))
 
 (rf/reg-event-fx
@@ -28,7 +29,7 @@
      :storage/load-key {:key        :workout-timer
                         :on-success [:boot/load-success]
                         :on-failure [:boot/load-failure]}
-    }))
+     }))
 
 ;; On load success, use the default db as defaults,
 ;; and write the loaded data over top of it.

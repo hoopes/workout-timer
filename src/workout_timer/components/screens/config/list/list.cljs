@@ -13,7 +13,7 @@
 (defn workout-list-view []
 
   (fn []
-    (let [workout-list (rf/subscribe [:ordered-workout-list])]
+    (let [workout-list (rf/subscribe [:workout/ordered-workout-list])]
       [rn/ScrollView {:style {:flex 1
                               :flex-direction "column"}}
 
