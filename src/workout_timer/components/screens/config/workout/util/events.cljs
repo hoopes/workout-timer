@@ -10,7 +10,7 @@
    :initial-rest 15
    :final-rest 45
    ;:num-exercises 12
-   :exercises []
+   :exercises []  ;; maybe? Use this when building exercises
    :created (str (t/now))})
 
 (defn- set-workout-defaults [workout]

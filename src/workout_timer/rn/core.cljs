@@ -42,6 +42,7 @@
 (defonce PickerIOS (r/adapt-react-class (.-PickerIOS ReactNative)))
 (defonce Picker.Item (r/adapt-react-class (.-Picker.Item ReactNative)))
 (defonce Platform (r/adapt-react-class (.-Platform ReactNative)))
+(defonce ProgressViewIOS (r/adapt-react-class (.-ProgressViewIOS ReactNative)))
 (defonce ScrollView (r/adapt-react-class (.-ScrollView ReactNative)))
 (defonce Slider (r/adapt-react-class (.-Slider ReactNative)))
 (defonce Text (r/adapt-react-class (.-Text ReactNative)))

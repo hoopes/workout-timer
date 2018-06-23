@@ -29,4 +29,8 @@
         num-ex (number-of-exercises workout)]
     (* num-ex sec-per-ex)))
 
-
+;; Return the current exercise that is executing - this
+;; is from the current state of the workout
+(defn curr-exercise [curr-state]
+  (let [idx (:exercise-idx curr-state)]
+    (get-in curr-state [:exercises idx])))

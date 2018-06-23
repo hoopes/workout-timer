@@ -1,9 +1,6 @@
 (ns workout-timer.ops.storage.core
   (:require [re-frame.core :as rf]))
 
-;; -- Handlers --------------------------------------------------------------
-
-
 ;; FIXME: Should we store routing state? I actually don't think so - loading
 ;; the app from the home state seems ok?
 (def storage-keys

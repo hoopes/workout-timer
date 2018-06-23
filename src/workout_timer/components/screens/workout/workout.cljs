@@ -4,60 +4,30 @@
             [workout-timer.styles.core :as s]
             [workout-timer.rn.core :as rn]
             [workout-timer.rn.icons :as icons]
-            [workout-timer.components.screens.workout.partials.overall-progress :as overall-progress]))
+            [workout-timer.components.screens.workout.partials.progress :as progress]
+            [workout-timer.components.screens.workout.partials.body :as body]
+            [workout-timer.components.screens.workout.partials.run-btn :as run-btn]))
 
-;; This panel is shown when we have selected a workout
+(defn- running-panel []
+  [rn/View {:flex 12 :flex-direction "column"}
+   [rn/View {:style {:flex 1 :border-color "black" :border-bottom-width 2}}
+    [progress/panel]]
+   [rn/View {:style {:flex 10}}
+    [body/main-panel]]
+   [rn/View {:style {:flex 1 :justify-content "center"}}
+    [run-btn/main-panel]]])
 
-;; Pause button
-;; display of current exercise
-;; display current timer
-;; switch workout button?
-;; detect on-leave? we could stop the timer
-
-(defn- temp-ex [ex]
-  (fn []
-    [rn/Text (:title ex)]))
-
-;(defn- timer-panel []
-  ;(fn []
-    ;[rn/View {:style {:flex 1 :flex-direction "row" :align-items "flex-start"}}
-     ;[rn/View {:style {:flex 1 :height "100%"}}
-      ;[rn/Text "TIME REMAINING"]]
-     ;[rn/View {:style {:flex 1 :height "100%" :border-color "black" :border-width 1}}
-      ;[rn/Text "TOTAL TIME"]]]))
+(defn- complete-panel []
+  [rn/View {:style {:flex 1
+                    :align-items "center"
+                    :justify-content "center"
+                    :background-color "red"}}
+   [rn/View
+    [rn/Text "COMPLETE"]]])
 
 (def workout-main-panel
   (fn []
-    (let [workout (rf/subscribe [:workout/current-workout])
-          is-running (rf/subscribe [:workout/running])]
-      [rn/View {:style {:flex 1
-                        :flex-direction "column"
-                        :border-color "green"
-                        :border-width 4 }}
-
-       [rn/View {:style {:flex 2 :border-color "black" :border-width 1}}
-        [overall-progress/panel]]
-
-       [rn/View {:style {:flex 9 :border-color "yellow" :border-width 1}}
-
-
-        [rn/Text (str "WORKOUT IS " (if @is-running "RUNNING" "PAUSED"))]
-        [rn/Text (:title @workout)]
-
-        [rn/TouchableHighlight
-         {:on-press #(rf/dispatch [:workout/toggle-running])}
-         [rn/Text "START WORKOUT"]]
-
-        ;; Note - using the idx as a key is bad practice, but I
-        ;; don't really care here....
-        ;(let [ex-list (rf/subscribe [:workout/exercise-list])]
-
-          ;(map-indexed (fn [idx ex]
-                         ;^{:key idx} [temp-ex ex]) @ex-list))
-                         ]
-
-       ;(for [ex @ex-list]
-       ;^{:key ex} [temp-ex ex]))]
-
-       ])))
-
+    (let [is-complete (rf/subscribe [:workout/complete])]
+      (if (not @is-complete)
+        [running-panel]
+        [complete-panel]))))

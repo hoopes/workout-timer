@@ -33,8 +33,7 @@
 
        (if @workout
          [workout/workout-main-panel]
-         [choose/choose-main-panel])
-         ])))
+         [choose/choose-main-panel])])))
 
 
 (def stack-screens
